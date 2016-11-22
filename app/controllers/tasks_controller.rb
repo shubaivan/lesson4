@@ -1,6 +1,5 @@
 class TasksController < ApplicationController
   before_action :authorize
-  before_action :normalize_params, only: :update
 
   def index
     @task = Task.new
@@ -39,10 +38,6 @@ class TasksController < ApplicationController
   end
 
   private
-
-  def normalize_params
-    params[:task] ||= { done: false }
-  end
 
   def task_params
     params.fetch(:task).permit(:title, :done)

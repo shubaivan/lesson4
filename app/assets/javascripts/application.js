@@ -16,21 +16,26 @@
 //= require_tree .
 
 $(document).on('change', 'input#boss', function(){
-  $('input:checkbox').prop('checked', this.checked)
+  $('input:checkbox').prop('checked', this.checked);
+  $("#tasks:not([data-type=''])").slideUp()
 })
 
 $(document).on('change', '.single input[type=checkbox]', function(){
-  generalCheckState()
+  var url = window.location.href;
+  var lastPart = url.substr(url.lastIndexOf('/') + 1);
+  if (lastPart == "tasks") {
+     BossState()
+  }
 })
 
-function generalCheckState() {
+function BossState() {
   var checkedCount = document.querySelectorAll('.single input:checked').length;
     checkboxes = document.querySelectorAll('.single input[type=checkbox]'),
     checkall = document.getElementById('boss');
-    checkall.checked = checkedCount == checkboxes.length;
+    checkall.checked = checkedCount == checkboxes.length && checkedCount != 0;
     checkall.indeterminate = checkedCount > 0 && checkedCount < checkboxes.length;
 }
 
-$(document).ready(function(){
-   generalCheckState();
+$(document).on('turbolinks:load', function() {
+   BossState();
  });

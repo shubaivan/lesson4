@@ -12,7 +12,7 @@
 <%= render 'share' %>
 <%= render 'form' %>
 
-<input type='checkbox' name='done' id='boss' value='1' data-url="<%= list_tasks_path(current_list) %>" data-method="PATCH" data-remote <%= 'checked' if tasks.all?(&:done) %> >
+<input type='checkbox' name='done' id='boss' value='1' data-url="<%= list_tasks_path(current_list) %>" data-method="PATCH" data-remote>
 <ol id='tasks' data-type="<%= params[:type] %>">
   <%= render tasks %>
 </ol>
