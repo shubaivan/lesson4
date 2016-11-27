@@ -1,0 +1,12 @@
+
+<% if current_user %>
+  <%= form_for @list, remote: true do |f| %>
+    <h3>
+      <%= label_tag 'Create new list: ' %>
+    </h3>
+    <%= hidden_field_tag :list_id, @list.id %>
+    <%= f.text_field :title, autocomplete: false %>
+    <%= f.submit %>
+    <hr />
+  <% end %>
+<% end %>

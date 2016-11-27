@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def current_list
-    @current_list ||= current_user.lists.find(params[:list_id])
+    @current_list ||= current_user.lists.find(params[:list_id]) if current_user
   end
 
   helper_method :current_list

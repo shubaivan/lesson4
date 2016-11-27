@@ -1,0 +1,11 @@
+<div id='lists'>
+  <ol>
+    <% if current_user %>
+      <% current_user.lists.each do |list| %>
+        <li>
+          <%= list.title %>
+        </li>
+      <% end %>
+    <% end %>
+  </ol>
+</div>

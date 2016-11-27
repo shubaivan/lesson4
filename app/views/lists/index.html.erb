@@ -1,0 +1,8 @@
+
+<%= render 'form' %>
+<%= render 'list' %>
+<%= link_to 'Back', list_tasks_path(current_user.lists.ids) %>
+
+<% if !(current_user) %>
+  <h1> Please Log In or Sign Up! </h1>
+<% end %>
