@@ -1,23 +1,20 @@
 class ListsController < ApplicationController
   before_action :authorize
+  before_action :find_list, except: [:index, :create]
 
   def index
     @lists = List.for(current_user)
-    new
-  end
-
-  def new
     @list = List.new
-  end
-
-  def create
-    @list = current_user.lists.create(list_params)
-    redirect_to list_tasks_path(@list.id) if @list.save
   end
 
   def show
     @list = List.find(params[:id])
     redirect_to list_tasks_path(@list.id)
+  end
+
+  def create
+    @list = current_user.lists.create(list_params)
+    redirect_to list_tasks_path(@list.id) if @list.save
   end
 
   def update
@@ -26,14 +23,21 @@ class ListsController < ApplicationController
     redirect_to list_tasks_path(@list)
   end
 
+  def update
+    @list.users << User.where(id: params[:user_id])
+  end
+
   def destroy
-    @list = List.find(params[:id])
     @list.destroy
   end
 
   private
 
   def list_params
-    params.require(:list).permit(:list, :title)
+    params.require(:list).permit(:title)
+  end
+
+  def find_list
+    @list = List.find(params[:id])
   end
 end

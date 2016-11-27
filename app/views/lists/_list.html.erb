@@ -1,10 +1,4 @@
-<div id='lists'>
-  <ol>
-    <% @lists.each do |list| %>
-      <li id="list_<%= list.id %>">
-        <%= link_to list.title, list %>
-        <%= link_to 'X', list, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
-      </li>
-    <% end %>
-  </ol>
-</div>
+<li id="list_<%= list.id %>">
+  <%= link_to list.title, list_tasks_path(list) %>
+  <%= link_to '×', list_path(list), method: :delete, remote: true, class: 'delete' %>
+</li>

@@ -2,6 +2,7 @@ class User < ApplicationRecord
   EMAIL_REGEX = /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
 
   has_secure_password
+
   has_many :lists, dependent: :destroy
   has_and_belongs_to_many :shared_lists, class_name: 'List', dependent: :destroy
   has_many :tasks, through: :lists, dependent: :destroy
