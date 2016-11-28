@@ -12,12 +12,20 @@ class ListsController < ApplicationController
 
   def create
   @list = current_user.lists.create(list_params)
-    respond_to do |format|
-      if @list.save
-        format.html { redirect_to root_url }
-        format.js
-      end
+    if @list.save
+      redirect_to list_tasks_path(@list.id)
     end
+  end
+
+  def show
+    @list = List.find(params[:id])
+    redirect_to list_tasks_path(@list.id)
+  end
+
+  def destroy
+    @list = List.find(params[:id])
+    @list.destroy
+
   end
 
   private
