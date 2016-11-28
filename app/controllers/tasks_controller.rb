@@ -51,6 +51,5 @@ class TasksController < ApplicationController
   def tasks
     @tasks ||= current_list.tasks.filtered(params[:type]).order(id: :desc)
   end
-
   helper_method :tasks
 end

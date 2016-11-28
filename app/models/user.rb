@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   has_secure_password
   has_many :lists, dependent: :destroy
+  has_and_belongs_to_many :shared_lists, class_name: 'List', dependent: :destroy
   has_many :tasks, through: :lists, dependent: :destroy
 
   validates :name, presence: true, length: { minimum: 3 }

@@ -1,12 +1,10 @@
 <div id='lists'>
   <ol>
-    <% if current_user %>
-      <% current_user.lists.each do |list| %>
-        <li id="list_<%= list.id %>">
-          <%= link_to list.title, list %>
-          <%= link_to 'X', list, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
-        </li>
-      <% end %>
+    <% @lists.each do |list| %>
+      <li id="list_<%= list.id %>">
+        <%= link_to list.title, list %>
+        <%= link_to 'X', list, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+      </li>
     <% end %>
   </ol>
 </div>

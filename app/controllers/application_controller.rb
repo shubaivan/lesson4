@@ -7,10 +7,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def current_list
-
-    @current_list ||= List.find(params[:list_id]) if current_user
+    @current_list ||= List.for(current_user).find(params[:list_id]) if current_user
   end
-
   helper_method :current_list
 
   def authorize

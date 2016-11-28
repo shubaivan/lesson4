@@ -1,20 +1,18 @@
 class ListsController < ApplicationController
+  before_action :authorize
 
   def index
-    @lists = current_user.lists if current_user
+    @lists = List.for(current_user)
     new
   end
-
 
   def new
     @list = List.new
   end
 
   def create
-  @list = current_user.lists.create(list_params)
-    if @list.save
-      redirect_to list_tasks_path(@list.id)
-    end
+    @list = current_user.lists.create(list_params)
+    redirect_to list_tasks_path(@list.id) if @list.save
   end
 
   def show
@@ -24,13 +22,13 @@ class ListsController < ApplicationController
 
   def update
     @list = List.find(params[:id])
-    User.find_by(id: params[:user_id]).lists  << @list
+    User.find_by(id: params[:user_id]).shared_lists << @list
+    redirect_to list_tasks_path(@list)
   end
 
   def destroy
     @list = List.find(params[:id])
     @list.destroy
-
   end
 
   private

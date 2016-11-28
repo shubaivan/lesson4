@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20161128103306) do
     t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
-  create_table "lists_users", force: :cascade do |t|
+  create_table "lists_users", primary_key: "false", force: :cascade do |t|
     t.integer "list_id"
     t.integer "user_id"
     t.index ["list_id", "user_id"], name: "index_lists_users_on_list_id_and_user_id"
