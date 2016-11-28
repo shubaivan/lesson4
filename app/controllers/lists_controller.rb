@@ -24,7 +24,7 @@ class ListsController < ApplicationController
 
   def update
     @list = List.find(params[:id])
-    @list.users << User.where(id: params[:user_id])
+    @list.users << User.find_by(id: params[:user_id])
   end
 
   def destroy
