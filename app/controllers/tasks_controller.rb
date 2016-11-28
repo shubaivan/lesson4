@@ -34,6 +34,10 @@ class TasksController < ApplicationController
     current_list.tasks.where(done: true).delete_all
   end
 
+  def share
+    @user = User.find(params[:email])
+  end
+
   private
 
   def normalize_params
