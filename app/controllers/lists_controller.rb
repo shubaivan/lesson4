@@ -22,6 +22,11 @@ class ListsController < ApplicationController
     redirect_to list_tasks_path(@list.id)
   end
 
+  def update
+    @list = List.find(params[:id])
+    @list.users << User.where(id: params[:user_id])
+  end
+
   def destroy
     @list = List.find(params[:id])
     @list.destroy

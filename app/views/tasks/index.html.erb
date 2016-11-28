@@ -9,6 +9,7 @@
 
 
 <h1><%= current_list.title %></h1>
+<%= render 'share' %>
 <%= render 'form' %>
 
 <input type='checkbox' name='done' id='boss' value='1' data-url="<%= list_tasks_path(current_list) %>" data-method="PATCH" data-remote <%= 'checked' if tasks.all?(&:done) %> >
