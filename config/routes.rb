@@ -4,9 +4,13 @@ Rails.application.routes.draw do
   get  'signup' => 'users#new'
   get  'login' => 'sessions#new'
   post 'login' => 'sessions#create'
-  get  'logout' => 'sessions#destroy'
+  delete 'logout' => 'sessions#destroy'
 
   resources :lists do
+    member do
+      patch 'share'
+    end
+
     resources :tasks, except: [:show] do
       patch '/', action: :update_all, on: :collection
       get ':type', action: :index,

@@ -10,6 +10,7 @@
 <h1><%= current_list.title %></h1>
 
 <%= render 'lists/sharing_form' %>
+<hr>
 <%= render 'form' %>
 
 <input type='checkbox' name='done' id='boss' value='1' data-url="<%= list_tasks_path(current_list) %>" data-method="PATCH" data-remote>
@@ -20,4 +21,12 @@
 <%= link_to "Remove completed", remove_completed_list_tasks_path,
                                 method: :get, remote: true %><br/>
 
-<%= link_to 'Back to lists', root_path %>
+<hr>
+<h2>List owner</h2>
+<p><%= current_list.user.name %></p>
+<h2>List is shared with</h2>
+<ul>
+  <%= current_list.users.find_each do |user| %>
+    <li><%= user.name %></li>
+  <% end %>
+</ul>

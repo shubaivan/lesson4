@@ -11,11 +11,17 @@ class User < ApplicationRecord
   validates :email, presence: true, format: EMAIL_REGEX, uniqueness: true
   validates :password, length: { minimum: 8 }, on: :create
 
-  after_create :create_default_list
+  after_create :create_default_list, :check_pending_lists
 
   private
 
   def create_default_list
     lists.create(title: :default)
+  end
+
+  def check_pending_lists
+    List.by_pending_email(email).each do |list|
+      list.users << self
+    end
   end
 end
