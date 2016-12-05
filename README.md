@@ -1,5 +1,4 @@
-- Encrypt user id in cookies
-  - http://api.rubyonrails.org/classes/ActiveSupport/MessageVerifier.html
-  - https://www.youtube.com/watch?v=qNJbe1HWXDA
+- Encrypt user id in cookies (cookies.signed)
+  - http://api.rubyonrails.org/classes/ActionDispatch/Cookies.html
 - Mark user if he is on list
 - Add tasks sorting by title and created_at (ASC && DESC)
