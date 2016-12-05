@@ -1,0 +1,5 @@
+<%= form_tag share_list_path(current_list), method: :patch, remote: true do |f| %>
+  <%= label_tag :email, 'Enter user email' %>
+  <%= text_field_tag :email %>
+  <%= submit_tag 'Send'%>
+<% end %>

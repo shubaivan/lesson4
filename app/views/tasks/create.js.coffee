@@ -1,2 +1,2 @@
 $('#tasks[data-type!="done"]').prepend("<%= j(render @task) %>")
-$('form')[0].reset()
+$('.new_task')[0].reset()

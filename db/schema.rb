@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161128103306) do
+ActiveRecord::Schema.define(version: 20161126143220) do
 
   create_table "lists", force: :cascade do |t|
     t.integer  "user_id"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20161128103306) do
   create_table "lists_users", primary_key: "false", force: :cascade do |t|
     t.integer "list_id"
     t.integer "user_id"
-    t.index ["list_id", "user_id"], name: "index_lists_users_on_list_id_and_user_id"
+    t.index ["list_id", "user_id"], name: "index_lists_users_on_list_id_and_user_id", unique: true
   end
 
   create_table "tasks", force: :cascade do |t|

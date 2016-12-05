@@ -1,6 +1,0 @@
-<%= form_tag list_path(current_list), method: :patch, remote: true do |f| %>
-  <%= label_tag :user_id, 'Share with' %>
-  <%= select_tag :user_id, options_from_collection_for_select(User.all, 'id', 'email') %>
-  <%= submit_tag 'Send'%>
-<% end %>
-<br />

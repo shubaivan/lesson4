@@ -1,13 +1,14 @@
 class ListsController < ApplicationController
   before_action :authorize
+  before_action :find_list, except: [:index, :create]
 
   def index
     @lists = List.for(current_user)
-    new
+    @list = List.new
   end
 
-  def new
-    @list = List.new
+  def show
+    redirect_to list_tasks_path(@list.id)
   end
 
   def create
@@ -15,25 +16,37 @@ class ListsController < ApplicationController
     redirect_to list_tasks_path(@list.id) if @list.save
   end
 
-  def show
-    @list = List.find(params[:id])
-    redirect_to list_tasks_path(@list.id)
-  end
-
-  def update
-    @list = List.find(params[:id])
-    User.find_by(id: params[:user_id]).shared_lists << @list
-    redirect_to list_tasks_path(@list)
+  def share
+    @user = User.find_by(email: params[:email])
+    if @list.all_users.include?(@user)
+      redirect_to list_tasks_path(@list), alert: 'This user is already added to the list'
+    else
+      send_email
+      @user.shared_lists << @list if @user
+      redirect_to list_tasks_path(@list), notice: 'Email is sent to user'
+    end
   end
 
   def destroy
-    @list = List.find(params[:id])
     @list.destroy
   end
 
   private
 
   def list_params
-    params.require(:list).permit(:list, :title)
+    params.require(:list).permit(:title)
+  end
+
+  def find_list
+    @list = List.find(params[:id])
+  end
+
+  def send_email
+    if @user
+      ListMailer.join_list_email(@user, current_user, @list).deliver_later
+    else
+      ListMailer.join_app_email(params[:email], @list).deliver_later
+      @list.pending_emails.create(email: params[:email])
+    end
   end
 end
