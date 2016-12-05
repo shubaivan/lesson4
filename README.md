@@ -1,7 +1,5 @@
-- Share list by email
-  - Send email to exsiting user
-  - Send invite to non existing user
-- Display co-owners of current list
-
-`Letter opener` for emails
--
+- Encrypt user id in cookies
+  - http://api.rubyonrails.org/classes/ActiveSupport/MessageVerifier.html
+  - https://www.youtube.com/watch?v=qNJbe1HWXDA
+- Mark user if he is on list
+- Add tasks sorting by title and created_at (ASC && DESC)
