@@ -2,11 +2,19 @@
 class ListsChannel < ApplicationCable::Channel
   def subscribed
     stream_from "lists_channel_#{params[:list]}"
-    # TODO
-    # ActionCable.server.broadcast('ListsChannel', user: current_user.id)
   end
 
   def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
+    broadcast_status('offline')
+  end
+
+  def appear
+    broadcast_status('online')
+  end
+
+  def broadcast_status(status)
+    ActionCable.server.broadcast("lists_channel_#{params[:list]}",
+                                 user: current_user.id,
+                                 status: status)
   end
 end

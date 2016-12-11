@@ -14,6 +14,10 @@
 <%= render 'form' %>
 
 <input type='checkbox' name='done' id='boss' value='1' data-url="<%= list_tasks_path(current_list) %>" data-method="PATCH" data-remote>
+<div id='sort'>
+  <%= render 'sort' %>
+</div>
+
 <ol id='tasks' data-type="<%= params[:type] %>">
   <%= render tasks %>
 </ol>
@@ -23,10 +27,10 @@
 
 <hr>
 <h2>List owner</h2>
-<p><%= current_list.user.name %></p>
+<p data-person='<%= current_list.user.id %>'><%= current_list.user.name %></p>
 <h2>List is shared with</h2>
 <ul>
   <%= current_list.users.find_each do |user| %>
-    <li><%= user.name %></li>
+    <li data-person='<%= user.id %>'><%= user.name %></li>
   <% end %>
 </ul>

@@ -9,7 +9,9 @@ module ApplicationCable
     protected
 
     def find_verified_user
-      if (current_user = User.find_by(id: cookies.signed[:user_id]))
+      verifier = ActiveSupport::MessageVerifier.new('jsdhf')
+      id = verifier.verified(cookies.signed[:user_id])
+      if (current_user = User.find_by(id: id))
         current_user
       else
         reject_unauthorized_connection
