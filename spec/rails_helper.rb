@@ -9,6 +9,8 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist
+Capybara.default_driver = :poltergeist
+
 Capybara.server_host = 'lvh.me'
 
 ActiveRecord::Migration.maintain_test_schema!
