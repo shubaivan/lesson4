@@ -16,7 +16,14 @@ gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'poltergeist'
+  gem 'factory_girl_rails'
 end
+
+gem 'simplecov', require: false, group: :test
+gem 'database_cleaner', group: :test
 
 group :development do
   gem 'web-console'

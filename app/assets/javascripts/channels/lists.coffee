@@ -11,11 +11,11 @@ $(document).on 'turbolinks:load', ->
         @addStatusClass(data.user, data.status)
       else
         return if $("[data-user=#{ data.user }]")[0]
-        Turbolinks.visit(location.href)
+        eval(data.action)
 
     appear: ->
       @perform('appear')
 
     addStatusClass: (user, status) ->
-      $("[data-person=#{user}]").removeClass();
-      $("[data-person=#{user}]").addClass(status);
+      $("[data-person=#{user}]").removeClass()
+      $("[data-person=#{user}]").addClass(status)

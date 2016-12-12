@@ -52,7 +52,7 @@ class TasksController < ApplicationController
   helper_method :tasks
 
   def broadcast
-    ActionCable.server.broadcast("lists_channel_#{current_list.id}", user: current_user.id)
+    ActionCable.server.broadcast("lists_channel_#{current_list.id}", user: current_user.id, action: render_to_string(params[:action]))
   end
 
   def sortable_columns
