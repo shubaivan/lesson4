@@ -47,11 +47,25 @@ class TasksController < ApplicationController
   end
 
   def tasks
-    @tasks ||= current_list.tasks.filtered(params[:type]).order(id: :desc)
+    @tasks ||= current_list.tasks.filtered(params[:type]).order("#{sort_column} #{sort_direction}")
   end
   helper_method :tasks
 
   def broadcast
     ActionCable.server.broadcast("lists_channel_#{current_list.id}", user: current_user.id)
   end
+
+  def sortable_columns
+    %w(title created_at)
+  end
+
+  def sort_column
+    sortable_columns.include?(params[:column]) ? params[:column] : 'created_at'
+  end
+  helper_method :sort_column
+
+  def sort_direction
+    %w(asc desc).include?(params[:direction]) ? params[:direction] : 'desc'
+  end
+  helper_method :sort_direction
 end

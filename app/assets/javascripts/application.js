@@ -37,5 +37,7 @@ function BossState() {
 }
 
 $(document).on('turbolinks:load', function() {
-   BossState();
- });
+  if (document.getElementById('boss')) {
+    BossState();
+  }
+});
