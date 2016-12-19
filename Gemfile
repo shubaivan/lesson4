@@ -20,6 +20,8 @@ group :development, :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'factory_girl_rails'
+  gem 'debase'
+  gem 'ruby-debug-ide'
 end
 
 gem 'simplecov', require: false, group: :test
